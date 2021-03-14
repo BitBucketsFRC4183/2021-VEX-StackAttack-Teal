@@ -1,3 +1,9 @@
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// Drivetrain           drivetrain    1, 10           
+// ---- END VEXCODE CONFIGURED DEVICES ----
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
@@ -19,11 +25,12 @@
 using namespace vex;
 
 void driveRobot() {
-  if (Controller1.Axis1.position() == 0) {
+
+  if (Controller1.Axis1.position(percent) == 0) {
     Drivetrain.stop();
   }
 
-  if (Controller1.Axis1.position() > 0) {
+  if (Controller1.Axis1.position(percent) > 0) {
     Drivetrain.drive(forward);
   } else {
     Drivetrain.drive(reverse);
@@ -37,8 +44,8 @@ int main() {
 
   Drivetrain.setDriveVelocity(50, percent);
 
-  Controller1.Axis1.changed(driveRobot);
- 
-  }
+  Controller1.Axis2.changed(driveRobot);
+
+}
 
 
