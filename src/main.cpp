@@ -55,6 +55,7 @@ void moveClaw() {
   Brain.Screen.print("moev claw");
   Brain.Screen.print(openClaw.pressing());
   Brain.Screen.print(closeClaw.pressing());
+
   if (openClaw.pressing()) {
     ClawMotor.spin(forward);
   } else if (closeClaw.pressing()) {
@@ -81,6 +82,18 @@ void moveArm() {
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
+  
+  Brain.Screen.clearScreen();
+  Brain.Screen.setPenColor(white);
+  Brain.Screen.setPenWidth(20);
+  Brain.Screen.newLine();
+  Brain.Screen.setCursor(1, 1);
+  Brain.Screen.print("starting now");
+
+  Controller1.Screen.clearScreen();
+  Controller1.Screen.newLine();
+  Controller1.Screen.setCursor(1, 1);
+  Controller1.Screen.print("controller starting now");
 
   Drivetrain.setDriveVelocity(50, percent);
   ClawMotor.setVelocity(50, percent);
