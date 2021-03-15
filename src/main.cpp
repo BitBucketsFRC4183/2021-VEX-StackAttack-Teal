@@ -52,6 +52,9 @@ void driveRobot() {
 }
 
 void moveClaw() {
+  Brain.Screen.print("moev claw");
+  Brain.Screen.print(openClaw.pressing());
+  Brain.Screen.print(closeClaw.pressing());
   if (openClaw.pressing()) {
     ClawMotor.spin(forward);
   } else if (closeClaw.pressing()) {
@@ -59,10 +62,12 @@ void moveClaw() {
   } else {
     ClawMotor.stop();
   }
-  
 }
 
 void moveArm() {
+  Brain.Screen.print("moev arm");
+  Brain.Screen.print(liftArm.pressing());
+  Brain.Screen.print(dropArm.pressing());
   if (liftArm.pressing()) {
     ArmMotor.spin(forward);
   } else if (dropArm.pressing()) {
