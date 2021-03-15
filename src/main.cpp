@@ -81,6 +81,10 @@ int main() {
   ClawMotor.setVelocity(50, percent);
   ArmMotor.setVelocity(50, percent);
 
+  Drivetrain.setStopping(brake);
+  ClawMotor.setStopping(hold);
+  ArmMotor.setStopping(hold);
+
   Controller1.Axis1.changed(turnRobot);
   Controller1.Axis2.changed(driveRobot);
 
