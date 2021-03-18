@@ -4,7 +4,7 @@
 // Controller1          controller                    
 // Drivetrain           drivetrain    1, 10           
 // ClawMotor            motor         2               
-// ArmMotor             motor         3               
+// Vision3              vision        3               
 // ---- END VEXCODE CONFIGURED DEVICES ----
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -19,6 +19,7 @@
 
 using namespace vex;
 
+/*
 vex::controller::button openClaw = Controller1.ButtonL1;
 vex::controller::button closeClaw = Controller1.ButtonL2;
 
@@ -77,11 +78,23 @@ void moveArm() {
     ArmMotor.stop();
   }
 }
-
+*/
 
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
+
+  Vision3.takeSnapshot(Vision3__SIG_1);
+
+  Brain.Screen.print(Vision3.objectCount);
+  Brain.Screen.print(Vision3.objects[0].angle);
+  Brain.Screen.print(Vision3.objects[0].centerX);
+  Brain.Screen.print(Vision3.objects[0].centerY);
+  Brain.Screen.print(Vision3.objects[0].exists);
+  Brain.Screen.print(Vision3.objects[0].height);
+  Brain.Screen.print(Vision3.objects[0].width);
+
+  /*
   
   Brain.Screen.clearScreen();
   Brain.Screen.setPenColor(white);
@@ -115,6 +128,7 @@ int main() {
   liftArm.released(moveArm);
   dropArm.pressed(moveArm);
   dropArm.released(moveArm);
+  */
 
 }
 
