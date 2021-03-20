@@ -16,7 +16,7 @@ motor ClawMotor = motor(PORT2, ratio18_1, false);
 /*vex-vision-config:begin*/
 vision::signature Vision3__SIG_1 (1, 0, 0, 0, 0, 0, 0, 2.500, 0);
 vision::signature Vision3__SIG_2 (2, 0, 0, 0, 0, 0, 0, 2.500, 0);
-vision::signature Vision3__SIG_3 (3, 337, 2259, 1298, 4413, 8705, 6559, 2.500, 0);
+vision::signature Vision3__SIG_3 (3, -6003, -1311, -3657, -1065, 1185, 60, 0.800, 0);
 vision::signature Vision3__SIG_4 (4, 0, 0, 0, 0, 0, 0, 2.500, 0);
 vision::signature Vision3__SIG_5 (5, 0, 0, 0, 0, 0, 0, 2.500, 0);
 vision::signature Vision3__SIG_6 (6, 0, 0, 0, 0, 0, 0, 2.500, 0);

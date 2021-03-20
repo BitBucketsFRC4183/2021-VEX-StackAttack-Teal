@@ -20,106 +20,84 @@
 
 using namespace vex;
 
-/*
-vex::controller::button openClaw = Controller1.ButtonL1;
-vex::controller::button closeClaw = Controller1.ButtonL2;
+// vex::controller::button openClaw = Controller1.ButtonL1;
+// vex::controller::button closeClaw = Controller1.ButtonL2;
 
-vex::controller::button liftArm = Controller1.ButtonR1;
-vex::controller::button dropArm = Controller1.ButtonR2;
+// vex::controller::button liftArm = Controller1.ButtonR1;
+// vex::controller::button dropArm = Controller1.ButtonR2;
 
-void turnRobot() {
-  if (Controller1.Axis1.position(percent) == 0) {
-    Drivetrain.setTurnVelocity(0, percent);
-  }
+// void turnRobot() {
+//   if (Controller1.Axis1.position(percent) == 0) {
+//     Drivetrain.setTurnVelocity(0, percent);
+//   }
 
-  if (Controller1.Axis1.position(percent) > 0) {
-    Drivetrain.turn(right);
-  } else {
-    Drivetrain.turn(left);
-  }
+//   if (Controller1.Axis1.position(percent) > 0) {
+//     Drivetrain.turn(right);
+//   } else {
+//     Drivetrain.turn(left);
+//   }
+// }
+
+// void driveRobot() {
+
+//   if (Controller1.Axis2.position(percent) == 0) {
+//     Drivetrain.stop();
+//   }
+
+//   if (Controller1.Axis2.position(percent) > 0) {
+//     Drivetrain.drive(forward);
+//   } else {
+//     Drivetrain.drive(reverse);
+//   }
+
+// }
+
+// void moveClaw() {
+//   Brain.Screen.print("moev claw");
+//   Brain.Screen.print(openClaw.pressing());
+//   Brain.Screen.print(closeClaw.pressing());
+
+//   if (openClaw.pressing()) {
+//     ClawMotor.spin(forward);
+//   } else if (closeClaw.pressing()) {
+//     ClawMotor.spin(reverse);
+//   } else {
+//     ClawMotor.stop();
+//   }
+// }
+
+// void moveArm() {
+//   Brain.Screen.print("moev arm");
+//   Brain.Screen.print(liftArm.pressing());
+//   Brain.Screen.print(dropArm.pressing());
+//   if (liftArm.pressing()) {
+//     ArmMotor.spin(forward);
+//   } else if (dropArm.pressing()) {
+//     ArmMotor.spin(reverse);
+//   } else {
+//     ArmMotor.stop();
+//   }
+// }
+
+
+bool isGreenCube() {
+  Vision3.takeSnapshot(Vision3__SIG_3);
+
+  bool isGreen = Vision3.objects[0].exists;
+
+  return isGreen;
 }
-
-void driveRobot() {
-
-  if (Controller1.Axis2.position(percent) == 0) {
-    Drivetrain.stop();
-  }
-
-  if (Controller1.Axis2.position(percent) > 0) {
-    Drivetrain.drive(forward);
-  } else {
-    Drivetrain.drive(reverse);
-  }
-
-}
-
-void moveClaw() {
-  Brain.Screen.print("moev claw");
-  Brain.Screen.print(openClaw.pressing());
-  Brain.Screen.print(closeClaw.pressing());
-
-  if (openClaw.pressing()) {
-    ClawMotor.spin(forward);
-  } else if (closeClaw.pressing()) {
-    ClawMotor.spin(reverse);
-  } else {
-    ClawMotor.stop();
-  }
-}
-
-void moveArm() {
-  Brain.Screen.print("moev arm");
-  Brain.Screen.print(liftArm.pressing());
-  Brain.Screen.print(dropArm.pressing());
-  if (liftArm.pressing()) {
-    ArmMotor.spin(forward);
-  } else if (dropArm.pressing()) {
-    ArmMotor.spin(reverse);
-  } else {
-    ArmMotor.stop();
-  }
-}
-*/
 
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
 
-  std::cout << "hi" << std::endl;
-
   while (true) {
-    Vision3.takeSnapshot(Vision3__SIG_3);
-
-    std::cout << Vision3.objectCount << std::endl;
-    std::cout << Vision3.objects[0].angle << std::endl;
-    std::cout << Vision3.objects[0].centerX << std::endl;
-    std::cout << Vision3.objects[0].centerY << std::endl;
-    std::cout << Vision3.objects[0].exists << std::endl;
-    std::cout << Vision3.objects[0].height << std::endl;
-    std::cout << Vision3.objects[0].width << std::endl;
-
-    Brain.Screen.print(Vision3.objectCount);
-    Brain.Screen.print(Vision3.objects[0].angle);
-    Brain.Screen.print(Vision3.objects[0].centerX);
-    Brain.Screen.print(Vision3.objects[0].centerY);
-    Brain.Screen.print(Vision3.objects[0].exists);
-    Brain.Screen.print(Vision3.objects[0].height);
-    Brain.Screen.print(Vision3.objects[0].width);
+    std::cout << isGreenCube() << std::endl;
+    Brain.Screen.print(isGreenCube());
   }
 
   /*
-  Brain.Screen.clearScreen();
-  Brain.Screen.setPenColor(white);
-  Brain.Screen.setPenWidth(20);
-  Brain.Screen.newLine();
-  Brain.Screen.setCursor(1, 1);
-  Brain.Screen.print("starting now");
-
-  Controller1.Screen.clearScreen();
-  Controller1.Screen.newLine();
-  Controller1.Screen.setCursor(1, 1);
-  Controller1.Screen.print("controller starting now");
-
   Drivetrain.setDriveVelocity(50, percent);
   ClawMotor.setVelocity(50, percent);
   ArmMotor.setVelocity(50, percent);
