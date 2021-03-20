@@ -95,30 +95,30 @@ int main() {
   while (true) {
     std::cout << isGreenCube() << std::endl;
     Brain.Screen.print(isGreenCube());
+    
+    // Drivetrain.setDriveVelocity(50, percent);
+    // ClawMotor.setVelocity(50, percent);
+    // ArmMotor.setVelocity(50, percent);
+
+    // Drivetrain.setStopping(brake);
+    // ClawMotor.setStopping(hold);
+    // ArmMotor.setStopping(hold);
+
+    // Controller1.Axis1.changed(turnRobot);
+    // Controller1.Axis2.changed(driveRobot);
+
+    // openClaw.pressed(moveClaw);
+    // openClaw.released(moveClaw);
+    // closeClaw.pressed(moveClaw);
+    // closeClaw.released(moveClaw);
+
+    // liftArm.pressed(moveArm);
+    // liftArm.released(moveArm);
+    // dropArm.pressed(moveArm);
+    // dropArm.released(moveArm);
+
   }
-
-  /*
-  Drivetrain.setDriveVelocity(50, percent);
-  ClawMotor.setVelocity(50, percent);
-  ArmMotor.setVelocity(50, percent);
-
-  Drivetrain.setStopping(brake);
-  ClawMotor.setStopping(hold);
-  ArmMotor.setStopping(hold);
-
-  Controller1.Axis1.changed(turnRobot);
-  Controller1.Axis2.changed(driveRobot);
-
-  openClaw.pressed(moveClaw);
-  openClaw.released(moveClaw);
-  closeClaw.pressed(moveClaw);
-  closeClaw.released(moveClaw);
-
-  liftArm.pressed(moveArm);
-  liftArm.released(moveArm);
-  dropArm.pressed(moveArm);
-  dropArm.released(moveArm);
-  */
+  
   return 0;
 
 }
