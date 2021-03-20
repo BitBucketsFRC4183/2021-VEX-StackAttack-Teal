@@ -16,6 +16,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "vex.h"
+#include <iostream>
 
 using namespace vex;
 
@@ -84,15 +85,27 @@ int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
 
-  Vision3.takeSnapshot(Vision3__SIG_3);
+  std::cout << "hi" << std::endl;
 
-  Brain.Screen.print(Vision3.objectCount);
-  Brain.Screen.print(Vision3.objects[0].angle);
-  Brain.Screen.print(Vision3.objects[0].centerX);
-  Brain.Screen.print(Vision3.objects[0].centerY);
-  Brain.Screen.print(Vision3.objects[0].exists);
-  Brain.Screen.print(Vision3.objects[0].height);
-  Brain.Screen.print(Vision3.objects[0].width);
+  while (true) {
+    Vision3.takeSnapshot(Vision3__SIG_3);
+
+    std::cout << Vision3.objectCount << std::endl;
+    std::cout << Vision3.objects[0].angle << std::endl;
+    std::cout << Vision3.objects[0].centerX << std::endl;
+    std::cout << Vision3.objects[0].centerY << std::endl;
+    std::cout << Vision3.objects[0].exists << std::endl;
+    std::cout << Vision3.objects[0].height << std::endl;
+    std::cout << Vision3.objects[0].width << std::endl;
+
+    Brain.Screen.print(Vision3.objectCount);
+    Brain.Screen.print(Vision3.objects[0].angle);
+    Brain.Screen.print(Vision3.objects[0].centerX);
+    Brain.Screen.print(Vision3.objects[0].centerY);
+    Brain.Screen.print(Vision3.objects[0].exists);
+    Brain.Screen.print(Vision3.objects[0].height);
+    Brain.Screen.print(Vision3.objects[0].width);
+  }
 
   /*
   Brain.Screen.clearScreen();
@@ -128,6 +141,7 @@ int main() {
   dropArm.pressed(moveArm);
   dropArm.released(moveArm);
   */
+  return 0;
 
 }
 
