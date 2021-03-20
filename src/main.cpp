@@ -84,7 +84,7 @@ int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
 
-  Vision3.takeSnapshot(Vision3__SIG_1);
+  Vision3.takeSnapshot(Vision3__SIG_3);
 
   Brain.Screen.print(Vision3.objectCount);
   Brain.Screen.print(Vision3.objects[0].angle);
@@ -95,7 +95,6 @@ int main() {
   Brain.Screen.print(Vision3.objects[0].width);
 
   /*
-  
   Brain.Screen.clearScreen();
   Brain.Screen.setPenColor(white);
   Brain.Screen.setPenWidth(20);
