@@ -32,22 +32,11 @@ controller::button closeClaw() {return Controller1.ButtonL2;}
 controller::button liftArm() {return Controller1.ButtonR1;}
 controller::button dropArm() {return Controller1.ButtonR2;}
 
-void turnRobot() {
-  if (turnAxis().position(percent) == 0) {
-    Drivetrain.setTurnVelocity(0, percent);
-  }
-
-  if (turnAxis().position(percent) > 0) {
-    Drivetrain.turn(vex::right);
-  } else {
-    Drivetrain.turn(vex::left);
-  }
-}
-
 void driveRobot() {
+  cout << "drive: ";
   cout << driveAxis().position() << endl;
   if (driveAxis().position() == 0) {
-    Drivetrain.stop();
+    Drivetrain.setDriveVelocity(0, percent);
   }
 
   if (driveAxis().position() > 0) {
@@ -58,14 +47,22 @@ void driveRobot() {
 
 }
 
-void moveClaw() {
-  Brain.Screen.print("move claw");
-  cout << "move claw" << endl;
-  Brain.Screen.print(openClaw().pressing());
-  cout << openClaw().pressing() << endl;
-  Brain.Screen.print(closeClaw().pressing());
-  cout << closeClaw().pressing() << endl;
+void turnRobot() {
+  cout << "turn: ";
+  cout << turnAxis().position() << endl;
+  if (turnAxis().position() == 0) {
+    Drivetrain.setTurnVelocity(0, percent);
+  }
 
+  if (turnAxis().position() > 0) {
+    Drivetrain.turn(vex::right);
+  } else {
+    Drivetrain.turn(vex::left);
+  }
+}
+
+
+void moveClaw() {
   if (openClaw().pressing()) {
     ClawMotor.spin(vex::forward);
   } else if (closeClaw().pressing()) {
@@ -76,13 +73,6 @@ void moveClaw() {
 }
 
 void moveArm() {
-  Brain.Screen.print("move arm");
-  cout << "move arm" << endl;
-  Brain.Screen.print(liftArm().pressing());
-  cout << liftArm().pressing() << endl;
-  Brain.Screen.print(dropArm().pressing());
-  cout << dropArm().pressing() << endl;
-
   if (liftArm().pressing()) {
     ArmMotor.spin(vex::forward);
   } else if (dropArm().pressing()) {
@@ -92,30 +82,45 @@ void moveArm() {
   }
 }
 
+/////////////////
+
 bool isGreenCube() {
   Vision3.takeSnapshot(Vision3__SIG_3);
   bool isGreen = Vision3.objects[0].exists;
   return isGreen;
 }
 
+/////////////////
+
 void teleopMode() {
-  turnAxis().changed(turnRobot);
-  driveAxis().changed(driveRobot);
+  while (true) {
+    driveRobot();
+    turnRobot();
 
-  openClaw().pressed(moveClaw);
-  openClaw().released(moveClaw);
-  closeClaw().pressed(moveClaw);
-  closeClaw().released(moveClaw);
+    moveClaw();
+    moveArm();
 
-  liftArm().pressed(moveArm);
-  liftArm().released(moveArm);
-  dropArm().pressed(moveArm);
-  dropArm().released(moveArm);
+    wait(0.5, seconds);
+
+    // cout << isGreenCube() << endl;
+
+    // turnAxis().changed(turnRobot);
+    // driveAxis().changed(driveRobot);
+
+    // openClaw().pressed(moveClaw);
+    // openClaw().released(moveClaw);
+    // closeClaw().pressed(moveClaw);
+    // closeClaw().released(moveClaw);
+
+    // liftArm().pressed(moveArm);
+    // liftArm().released(moveArm);
+    // dropArm().pressed(moveArm);
+    // dropArm().released(moveArm);
+  }
 }
 
 void autoMode() {
   // setDriveVelocity();
-
 }
 
 int main() {
@@ -129,11 +134,6 @@ int main() {
   Drivetrain.setStopping(brake);
   ClawMotor.setStopping(hold);
   ArmMotor.setStopping(hold);
-
-  while (true) {
-    cout << isGreenCube() << endl;
-    Brain.Screen.print(isGreenCube());
-  }
 
   teleopMode();
   autoMode();
