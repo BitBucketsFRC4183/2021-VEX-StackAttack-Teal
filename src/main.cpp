@@ -32,28 +32,90 @@ controller::button closeClaw() {return Controller1.ButtonL2;}
 controller::button liftArm() {return Controller1.ButtonR1;}
 controller::button dropArm() {return Controller1.ButtonR2;}
 
-int moveDrivetrain() {
+int debugStuff() {
   while (true) {
-    /// driving
-    Drivetrain.setDriveVelocity(abs(driveAxis().position()) / 2, percent);
-    if (driveAxis().position() > 0) {
-      Drivetrain.drive(vex::forward);
-    } else if (driveAxis().position() < 0) {
-      Drivetrain.drive(vex::reverse);
-    }
+    cout << "drive: ";
+    cout << driveAxis().position() << endl;
 
-    /// turning
-    Drivetrain.setTurnVelocity(abs(turnAxis().position()) / 2, percent);
-    if (turnAxis().position() > 0) {
-      Drivetrain.turn(vex::right);
-    } else if (turnAxis().position() < 0) {
-      Drivetrain.turn(vex::left);
-    }
+    cout << "turn: ";
+    cout << turnAxis().position() << endl;
+
+    cout << "velocity: ";
+    cout << Drivetrain.velocity(percent);
+    cout << "% and ";
+    cout << Drivetrain.velocity(rpm);
+    cout << "rpm" << endl;
+
+    cout << "power: ";
+    cout << Drivetrain.power() << endl;
+
+    cout << "----" << endl;
+
+    wait (0.5, seconds);
   }
   return 0;
 }
 
-int moveClaw() {
+void setDriveVel(int vel) {
+  int realVel = abs(vel);
+
+  //Change the velocity to some value between the configured range
+  int maxVel = 90;
+  int minVel = 10;
+
+  realVel = realVel > maxVel ? maxVel : (realVel < minVel ? minVel : realVel);
+
+  Drivetrain.setDriveVelocity(realVel, percent);
+}
+
+void setTurnVel(int vel) {
+  int realVel = abs(vel);
+
+  //Change the velocity to some value between the configured range
+  int maxVel = 90;
+  int minVel = 10;
+
+  realVel = realVel > maxVel ? maxVel : (realVel < minVel ? minVel : realVel);
+
+  Drivetrain.setTurnVelocity(realVel, percent);
+}
+
+int moveDrivetrainTask() {
+  while (true) {
+    int drivePos = driveAxis().position();
+    int turnPos = turnAxis().position();
+
+    setDriveVel(drivePos);
+    setTurnVel(turnPos);
+
+    if (drivePos == 0 && turnPos == 0) {
+      Drivetrain.stop();
+    }
+
+    /// driving
+    if (drivePos > 0) {
+      Drivetrain.drive(vex::forward);
+    } else if (drivePos < 0) {
+      Drivetrain.drive(vex::reverse);
+    } else {
+      Drivetrain.setDriveVelocity(0, percent);
+    }
+
+    /// turning
+    if (turnPos > 0) {
+      Drivetrain.turn(vex::right);
+    } else if (turnPos < 0) {
+      Drivetrain.turn(vex::left);
+    } else {
+      Drivetrain.setTurnVelocity(0, percent);
+    }
+
+    wait(0.5, seconds);
+  }
+  return 0;
+}
+
+int moveClawTask() {
   while (true) {
     if (openClaw().pressing()) {
       ClawMotor.spin(vex::forward);
@@ -62,11 +124,13 @@ int moveClaw() {
     } else {
       ClawMotor.stop();
     }
+
+    wait(0.5, seconds);
   }
   return 0;
 }
 
-int moveArm() {
+int moveArmTask() {
   while (true) {
     if (liftArm().pressing()) {
       ArmMotor.spin(vex::forward);
@@ -75,6 +139,8 @@ int moveArm() {
     } else {
       ArmMotor.stop();
     }
+
+    wait(0.5, seconds);
   }
   return 0;
 }
@@ -87,26 +153,15 @@ bool isGreenCube() {
   return isGreen;
 }
 
-/////////////////
-
-int debugStuff() {
-  while (true) {
-    cout << "drive: ";
-    cout << driveAxis().position() << endl;
-
-    cout << "turn: ";
-    cout << turnAxis().position() << endl;
-
-    wait (0.5, seconds);
-  }
-  return 0;
-}
 
 ////////////////
 void teleopMode() {
-  task drivetrainTask = task(moveDrivetrain);
-  task clawTask = task(moveClaw);
-  task armTask = task(moveArm);
+  task drivetrainTask = task(moveDrivetrainTask);
+  task clawTask = task(moveClawTask);
+  task armTask = task(moveArmTask);
+
+  // wait indefinitely
+  waitUntil(false);
 
   // while (true) {
     // cout << isGreenCube() << endl;
@@ -141,12 +196,10 @@ int main() {
   ClawMotor.setStopping(hold);
   ArmMotor.setStopping(hold);
 
-  // TODO:
-  // some debug task
   task debugTask = task(debugStuff);
 
-  teleopMode();
   autoMode();
+  teleopMode();
 
   // Competition.autonomous(autoMode);
   // Competition.drivercontrol(teleopMode);
