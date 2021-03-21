@@ -32,7 +32,7 @@ controller::button closeClaw() {return Controller1.ButtonL2;}
 controller::button liftArm() {return Controller1.ButtonR1;}
 controller::button dropArm() {return Controller1.ButtonR2;}
 
-void driveRobot() {
+int moveDrivetrain() {
   cout << "drive: ";
   cout << driveAxis().position() << endl;
   
@@ -44,9 +44,8 @@ void driveRobot() {
     Drivetrain.drive(vex::reverse);
   }
 
-}
+  ///
 
-void turnRobot() {
   cout << "turn: ";
   cout << turnAxis().position() << endl;
 
@@ -58,10 +57,12 @@ void turnRobot() {
     Drivetrain.turn(vex::left);
   }
 
+  wait(0.5, seconds);
+
+  return 0;
 }
 
-
-void moveClaw() {
+int moveClaw() {
   if (openClaw().pressing()) {
     ClawMotor.spin(vex::forward);
   } else if (closeClaw().pressing()) {
@@ -69,9 +70,11 @@ void moveClaw() {
   } else {
     ClawMotor.stop();
   }
+
+  return 0;
 }
 
-void moveArm() {
+int moveArm() {
   if (liftArm().pressing()) {
     ArmMotor.spin(vex::forward);
   } else if (dropArm().pressing()) {
@@ -79,6 +82,8 @@ void moveArm() {
   } else {
     ArmMotor.stop();
   }
+
+  return 0;
 }
 
 /////////////////
@@ -93,13 +98,10 @@ bool isGreenCube() {
 
 void teleopMode() {
   while (true) {
-    driveRobot();
-    turnRobot();
+    task drivetrainTask = task(moveDrivetrain);
 
-    moveClaw();
-    moveArm();
-
-    wait(0.5, seconds);
+    task clawTask = task(moveClaw);
+    task armTask = task(moveArm);
 
     // cout << isGreenCube() << endl;
 
