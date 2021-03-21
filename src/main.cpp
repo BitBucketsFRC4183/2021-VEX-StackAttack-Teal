@@ -33,46 +33,49 @@ controller::button liftArm() {return Controller1.ButtonR1;}
 controller::button dropArm() {return Controller1.ButtonR2;}
 
 int moveDrivetrain() {
-  /// driving
-  Drivetrain.setDriveVelocity(abs(driveAxis().position()) / 2, percent);
-  if (driveAxis().position() > 0) {
-    Drivetrain.drive(vex::forward);
-  } else if (driveAxis().position() < 0) {
-    Drivetrain.drive(vex::reverse);
-  }
+  while (true) {
+    /// driving
+    Drivetrain.setDriveVelocity(abs(driveAxis().position()) / 2, percent);
+    if (driveAxis().position() > 0) {
+      Drivetrain.drive(vex::forward);
+    } else if (driveAxis().position() < 0) {
+      Drivetrain.drive(vex::reverse);
+    }
 
-  /// turning
-  Drivetrain.setTurnVelocity(abs(turnAxis().position()) / 2, percent);
-  if (turnAxis().position() > 0) {
-    Drivetrain.turn(vex::right);
-  } else if (turnAxis().position() < 0) {
-    Drivetrain.turn(vex::left);
+    /// turning
+    Drivetrain.setTurnVelocity(abs(turnAxis().position()) / 2, percent);
+    if (turnAxis().position() > 0) {
+      Drivetrain.turn(vex::right);
+    } else if (turnAxis().position() < 0) {
+      Drivetrain.turn(vex::left);
+    }
   }
-
   return 0;
 }
 
 int moveClaw() {
-  if (openClaw().pressing()) {
-    ClawMotor.spin(vex::forward);
-  } else if (closeClaw().pressing()) {
-    ClawMotor.spin(vex::reverse);
-  } else {
-    ClawMotor.stop();
+  while (true) {
+    if (openClaw().pressing()) {
+      ClawMotor.spin(vex::forward);
+    } else if (closeClaw().pressing()) {
+      ClawMotor.spin(vex::reverse);
+    } else {
+      ClawMotor.stop();
+    }
   }
-
   return 0;
 }
 
 int moveArm() {
-  if (liftArm().pressing()) {
-    ArmMotor.spin(vex::forward);
-  } else if (dropArm().pressing()) {
-    ArmMotor.spin(vex::reverse);
-  } else {
-    ArmMotor.stop();
+  while (true) {
+    if (liftArm().pressing()) {
+      ArmMotor.spin(vex::forward);
+    } else if (dropArm().pressing()) {
+      ArmMotor.spin(vex::reverse);
+    } else {
+      ArmMotor.stop();
+    }
   }
-
   return 0;
 }
 
@@ -96,7 +99,6 @@ int debugStuff() {
 
     wait (0.5, seconds);
   }
-
   return 0;
 }
 
