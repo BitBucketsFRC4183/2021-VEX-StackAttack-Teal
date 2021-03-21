@@ -32,21 +32,15 @@ controller::button closeClaw() {return Controller1.ButtonL2;}
 controller::button liftArm() {return Controller1.ButtonR1;}
 controller::button dropArm() {return Controller1.ButtonR2;}
 
-
-
 void driveRobot() {
   cout << "drive: ";
   cout << driveAxis().position() << endl;
   
-  if (driveAxis().position() == 0) {
-    Drivetrain.setDriveVelocity(0, percent);
-  } else {
-    Drivetrain.setDriveVelocity(50, percent);
-  }
+  Drivetrain.setDriveVelocity(abs(driveAxis().position()), percent);
 
   if (driveAxis().position() > 0) {
     Drivetrain.drive(vex::forward);
-  } else {
+  } else if (driveAxis().position() < 0) {
     Drivetrain.drive(vex::reverse);
   }
 
@@ -56,17 +50,14 @@ void turnRobot() {
   cout << "turn: ";
   cout << turnAxis().position() << endl;
 
-  if (turnAxis().position() == 0) {
-    Drivetrain.setTurnVelocity(0, percent);
-  } else {
-    Drivetrain.setTurnVelocity(50, percent);
-  }
+  Drivetrain.setTurnVelocity(abs(turnAxis().position()), percent);
 
   if (turnAxis().position() > 0) {
     Drivetrain.turn(vex::right);
-  } else {
+  } else if (turnAxis().position() < 0) {
     Drivetrain.turn(vex::left);
   }
+
 }
 
 

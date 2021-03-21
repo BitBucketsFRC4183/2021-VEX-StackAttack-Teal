@@ -22,7 +22,7 @@ vision::signature Vision3__SIG_4 (4, 0, 0, 0, 0, 0, 0, 2.500, 0);
 vision::signature Vision3__SIG_5 (5, 0, 0, 0, 0, 0, 0, 2.500, 0);
 vision::signature Vision3__SIG_6 (6, 0, 0, 0, 0, 0, 0, 2.500, 0);
 vision::signature Vision3__SIG_7 (7, 0, 0, 0, 0, 0, 0, 2.500, 0);
-vision Vision3 = vision ( vex::PORT1, 50, Vision3__SIG_1, Vision3__SIG_2, Vision3__SIG_3, Vision3__SIG_4, Vision3__SIG_5, Vision3__SIG_6, Vision3__SIG_7 );
+vision Vision3 = vision ( vex::PORT3, 50, Vision3__SIG_1, Vision3__SIG_2, Vision3__SIG_3, Vision3__SIG_4, Vision3__SIG_5, Vision3__SIG_6, Vision3__SIG_7 );
 /*vex-vision-config:end*/
 
 // VEXcode generated functions
