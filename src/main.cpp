@@ -36,7 +36,7 @@ int moveDrivetrain() {
   cout << "drive: ";
   cout << driveAxis().position() << endl;
   
-  Drivetrain.setDriveVelocity(abs(driveAxis().position()), percent);
+  Drivetrain.setDriveVelocity(abs(driveAxis().position()) / 2, percent);
 
   if (driveAxis().position() > 0) {
     Drivetrain.drive(vex::forward);
@@ -49,15 +49,13 @@ int moveDrivetrain() {
   cout << "turn: ";
   cout << turnAxis().position() << endl;
 
-  Drivetrain.setTurnVelocity(abs(turnAxis().position()), percent);
+  Drivetrain.setTurnVelocity(abs(turnAxis().position()) / 2, percent);
 
   if (turnAxis().position() > 0) {
     Drivetrain.turn(vex::right);
   } else if (turnAxis().position() < 0) {
     Drivetrain.turn(vex::left);
   }
-
-  wait(0.5, seconds);
 
   return 0;
 }
@@ -102,6 +100,8 @@ void teleopMode() {
 
     task clawTask = task(moveClaw);
     task armTask = task(moveArm);
+
+    wait(0.5, seconds);
 
     // cout << isGreenCube() << endl;
 
