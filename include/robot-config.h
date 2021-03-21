@@ -8,6 +8,7 @@ using signature = vision::signature;
 extern controller Controller1;
 extern drivetrain Drivetrain;
 extern motor ClawMotor;
+extern motor ArmMotor;
 extern signature Vision3__SIG_1;
 extern signature Vision3__SIG_2;
 extern signature Vision3__SIG_3;

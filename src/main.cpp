@@ -20,64 +20,64 @@
 
 using namespace vex;
 
-// vex::controller::button openClaw = Controller1.ButtonL1;
-// vex::controller::button closeClaw = Controller1.ButtonL2;
+controller::button openClaw() {return Controller1.ButtonL1;}
+controller::button closeClaw() {return Controller1.ButtonL2;}
 
-// vex::controller::button liftArm = Controller1.ButtonR1;
-// vex::controller::button dropArm = Controller1.ButtonR2;
+controller::button liftArm() {return Controller1.ButtonR1;}
+controller::button dropArm() {return Controller1.ButtonR2;}
 
-// void turnRobot() {
-//   if (Controller1.Axis1.position(percent) == 0) {
-//     Drivetrain.setTurnVelocity(0, percent);
-//   }
+void turnRobot() {
+  if (Controller1.Axis1.position(percent) == 0) {
+    Drivetrain.setTurnVelocity(0, percent);
+  }
 
-//   if (Controller1.Axis1.position(percent) > 0) {
-//     Drivetrain.turn(right);
-//   } else {
-//     Drivetrain.turn(left);
-//   }
-// }
+  if (Controller1.Axis1.position(percent) > 0) {
+    Drivetrain.turn(right);
+  } else {
+    Drivetrain.turn(left);
+  }
+}
 
-// void driveRobot() {
+void driveRobot() {
 
-//   if (Controller1.Axis2.position(percent) == 0) {
-//     Drivetrain.stop();
-//   }
+  if (Controller1.Axis2.position(percent) == 0) {
+    Drivetrain.stop();
+  }
 
-//   if (Controller1.Axis2.position(percent) > 0) {
-//     Drivetrain.drive(forward);
-//   } else {
-//     Drivetrain.drive(reverse);
-//   }
+  if (Controller1.Axis2.position(percent) > 0) {
+    Drivetrain.drive(forward);
+  } else {
+    Drivetrain.drive(reverse);
+  }
 
-// }
+}
 
-// void moveClaw() {
-//   Brain.Screen.print("moev claw");
-//   Brain.Screen.print(openClaw.pressing());
-//   Brain.Screen.print(closeClaw.pressing());
+void moveClaw() {
+  Brain.Screen.print("moev claw");
+  Brain.Screen.print(openClaw().pressing());
+  Brain.Screen.print(closeClaw().pressing());
 
-//   if (openClaw.pressing()) {
-//     ClawMotor.spin(forward);
-//   } else if (closeClaw.pressing()) {
-//     ClawMotor.spin(reverse);
-//   } else {
-//     ClawMotor.stop();
-//   }
-// }
+  if (openClaw().pressing()) {
+    ClawMotor.spin(forward);
+  } else if (closeClaw().pressing()) {
+    ClawMotor.spin(reverse);
+  } else {
+    ClawMotor.stop();
+  }
+}
 
-// void moveArm() {
-//   Brain.Screen.print("moev arm");
-//   Brain.Screen.print(liftArm.pressing());
-//   Brain.Screen.print(dropArm.pressing());
-//   if (liftArm.pressing()) {
-//     ArmMotor.spin(forward);
-//   } else if (dropArm.pressing()) {
-//     ArmMotor.spin(reverse);
-//   } else {
-//     ArmMotor.stop();
-//   }
-// }
+void moveArm() {
+  Brain.Screen.print("moev arm");
+  Brain.Screen.print(liftArm().pressing());
+  Brain.Screen.print(dropArm().pressing());
+  if (liftArm().pressing()) {
+    ArmMotor.spin(forward);
+  } else if (dropArm().pressing()) {
+    ArmMotor.spin(reverse);
+  } else {
+    ArmMotor.stop();
+  }
+}
 
 
 bool isGreenCube() {
@@ -95,32 +95,33 @@ int main() {
   while (true) {
     std::cout << isGreenCube() << std::endl;
     Brain.Screen.print(isGreenCube());
-    
-    // Drivetrain.setDriveVelocity(50, percent);
-    // ClawMotor.setVelocity(50, percent);
-    // ArmMotor.setVelocity(50, percent);
 
-    // Drivetrain.setStopping(brake);
-    // ClawMotor.setStopping(hold);
-    // ArmMotor.setStopping(hold);
+    Drivetrain.setDriveVelocity(50, percent);
+    ClawMotor.setVelocity(50, percent);
+    ArmMotor.setVelocity(50, percent);
 
-    // Controller1.Axis1.changed(turnRobot);
-    // Controller1.Axis2.changed(driveRobot);
+    Drivetrain.setStopping(brake);
+    ClawMotor.setStopping(hold);
+    ArmMotor.setStopping(hold);
 
-    // openClaw.pressed(moveClaw);
-    // openClaw.released(moveClaw);
-    // closeClaw.pressed(moveClaw);
-    // closeClaw.released(moveClaw);
+    Controller1.Axis1.changed(turnRobot);
+    Controller1.Axis2.changed(driveRobot);
 
-    // liftArm.pressed(moveArm);
-    // liftArm.released(moveArm);
-    // dropArm.pressed(moveArm);
-    // dropArm.released(moveArm);
+    openClaw().pressed(moveClaw);
+    openClaw().released(moveClaw);
+    closeClaw().pressed(moveClaw);
+    closeClaw().released(moveClaw);
+
+    liftArm().pressed(moveArm);
+    liftArm().released(moveArm);
+    dropArm().pressed(moveArm);
+    dropArm().released(moveArm);
 
   }
   
   return 0;
 
 }
+
 
 
