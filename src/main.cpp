@@ -153,7 +153,6 @@ bool isGreenCube() {
   return isGreen;
 }
 
-
 ////////////////
 void teleopMode() {
   task drivetrainTask = task(moveDrivetrainTask);
@@ -182,7 +181,50 @@ void teleopMode() {
 }
 
 void autoMode() {
-  // setDriveVelocity();
+  setDriveVel(90);
+  setTurnVel(90);
+
+  ////////////////// take out recycling //////////////////
+  Drivetrain.driveFor(27, inches);
+    // todo: outtake
+  
+  ////////////////// walk the dog //////////////////
+  // setup
+  Drivetrain.turnFor(vex::right, 90, degrees);
+  Drivetrain.driveFor(24, inches);
+  // cross
+  Drivetrain.turnFor(vex::right, 45, degrees);
+  Drivetrain.driveFor(20, inches);
+  // recover; turn left towards green and orange cube
+  Drivetrain.turnFor(vex::right, 45, degrees);
+
+  ////////////////// set the table //////////////////
+  // setup 
+  Drivetrain.driveFor(20, inches);
+  Drivetrain.turnFor(vex::left, 90, degrees);
+  
+  // bottom cube first
+  Drivetrain.driveFor(5, inches);
+  Drivetrain.turnFor(vex::right, 90, degrees);
+
+  if (isGreenCube()) {
+    // push it off then go back to home
+    Drivetrain.driveFor(5, inches);
+    Drivetrain.driveFor(vex::reverse, 5, inches);
+    Drivetrain.turnFor(vex::right, 90, degrees);
+    Drivetrain.driveFor(26, inches);
+  } else {
+    // back up and go to top cube
+    Drivetrain.driveFor(vex::reverse, 5, inches);
+    Drivetrain.turnFor(vex::right, 90, degrees);
+    Drivetrain.driveFor(6, inches);
+    Drivetrain.turnFor(vex::left, 90, degrees);
+    // push it off then go back to home
+    Drivetrain.driveFor(5, inches);
+    Drivetrain.driveFor(vex::reverse, 5, inches);
+    Drivetrain.turnFor(vex::right, 90, degrees);
+    Drivetrain.driveFor(13, inches);
+  }
 }
 
 int main() {
@@ -199,13 +241,10 @@ int main() {
   task debugTask = task(debugStuff);
 
   autoMode();
-  teleopMode();
+  // teleopMode();
 
   // Competition.autonomous(autoMode);
   // Competition.drivercontrol(teleopMode);
   
   return 0;
 }
-
-
-
