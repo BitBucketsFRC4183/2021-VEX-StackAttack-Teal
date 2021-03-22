@@ -181,8 +181,8 @@ void teleopMode() {
 }
 
 void autoMode() {
-  setDriveVel(90);
-  setTurnVel(90);
+  setDriveVel(50);
+  setTurnVel(50);
 
   ////////////////// take out recycling //////////////////
   Drivetrain.driveFor(27, inches);

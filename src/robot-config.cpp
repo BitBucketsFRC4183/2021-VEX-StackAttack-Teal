@@ -11,7 +11,7 @@ brain  Brain;
 controller Controller1 = controller(primary);
 motor LeftDriveSmart = motor(PORT1, ratio18_1, false);
 motor RightDriveSmart = motor(PORT10, ratio18_1, true);
-drivetrain Drivetrain = drivetrain(LeftDriveSmart, RightDriveSmart, 319.19, 295, 40, mm, 1);
+drivetrain Drivetrain = drivetrain(LeftDriveSmart, RightDriveSmart, 319.19, 292.1, 165.1, mm, 1);
 motor ClawMotor = motor(PORT2, ratio18_1, false);
 motor ArmMotor = motor(PORT9, ratio18_1, false);
 /*vex-vision-config:begin*/
