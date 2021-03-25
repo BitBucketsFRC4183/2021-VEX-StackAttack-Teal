@@ -32,29 +32,6 @@ controller::button closeClaw() {return Controller1.ButtonL2;}
 controller::button liftArm() {return Controller1.ButtonR1;}
 controller::button dropArm() {return Controller1.ButtonR2;}
 
-int debugStuff() {
-  while (true) {
-    cout << "drive: ";
-    cout << driveAxis().position() << endl;
-
-    cout << "turn: ";
-    cout << turnAxis().position() << endl;
-
-    cout << "velocity: ";
-    cout << Drivetrain.velocity(percent);
-    cout << "% and ";
-    cout << Drivetrain.velocity(rpm);
-    cout << "rpm" << endl;
-
-    cout << "power: ";
-    cout << Drivetrain.power() << endl;
-
-    cout << "----" << endl;
-
-    wait (0.5, seconds);
-  }
-  return 0;
-}
 
 void setDriveVel(int vel) {
   int realVel = abs(vel);
@@ -63,6 +40,7 @@ void setDriveVel(int vel) {
   int maxVel = 90;
   int minVel = 10;
 
+  // clamp realVel to between maxVel and minVel
   realVel = realVel > maxVel ? maxVel : (realVel < minVel ? minVel : realVel);
 
   Drivetrain.setDriveVelocity(realVel, percent);
@@ -227,6 +205,33 @@ void autoMode() {
   }
 }
 
+int debugStuff() {
+  while (true) {
+    cout << "drive: ";
+    cout << driveAxis().position() << endl;
+
+    cout << "turn: ";
+    cout << turnAxis().position() << endl;
+
+    cout << "velocity: ";
+    cout << Drivetrain.velocity(percent);
+    cout << "% and ";
+    cout << Drivetrain.velocity(rpm);
+    cout << "rpm" << endl;
+
+    cout << "power: ";
+    cout << Drivetrain.power() << endl;
+
+    cout << "----" << endl;
+
+    // cout << "is there a green cube:";
+    // cout << isGreenCube() << endl;
+
+    wait (0.5, seconds);
+  }
+  return 0;
+}
+
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
@@ -240,8 +245,8 @@ int main() {
 
   task debugTask = task(debugStuff);
 
-  autoMode();
-  // teleopMode();
+  // autoMode();
+  teleopMode();
 
   // Competition.autonomous(autoMode);
   // Competition.drivercontrol(teleopMode);
