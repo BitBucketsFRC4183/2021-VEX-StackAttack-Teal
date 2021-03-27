@@ -24,7 +24,7 @@ using namespace std;
 competition Competition;
 
 controller::axis turnAxis() {return Controller1.Axis1;}
-controller::axis driveAxis() {return Controller1.Axis2;}
+controller::axis driveAxis() {return Controller1.Axis3;}
 
 controller::button openClaw() {return Controller1.ButtonL1;}
 controller::button closeClaw() {return Controller1.ButtonL2;}
@@ -32,6 +32,7 @@ controller::button closeClaw() {return Controller1.ButtonL2;}
 controller::button liftArm() {return Controller1.ButtonR1;}
 controller::button dropArm() {return Controller1.ButtonR2;}
 
+controller::button spinIntake() {return Controller1.ButtonA;}
 
 void setDriveVel(int vel) {
   int realVel = abs(vel);
@@ -126,6 +127,19 @@ int moveArmTask() {
   return 0;
 }
 
+int intakeWheelTask() {
+  while (true) {
+    if (spinIntake().pressing()) {
+      // motor 2 is reversed in the config, so they spin in the same direction here
+      IntakeWheel1Motor.spin(vex::forward);
+      IntakeWheel2Motor.spin(vex::forward);
+    } else {
+      IntakeWheel1Motor.stop();
+      IntakeWheel2Motor.stop();
+    }
+  }
+}
+
 /////////////////
 
 bool isGreenCube() {
@@ -139,6 +153,7 @@ void teleopMode() {
   task drivetrainTask = task(moveDrivetrainTask);
   task clawTask = task(moveClawTask);
   task armTask = task(moveArmTask);
+  task intakeTask = task(intakeWheelTask);
 
   // wait indefinitely
   waitUntil(false);
@@ -246,11 +261,15 @@ int main() {
   ClawMotor.setVelocity(50, percent);
   ArmMotor.setVelocity(50, percent);
   SecondArmMotor.setVelocity(50, percent);
+  IntakeWheel1Motor.setVelocity(50, percent);
+  IntakeWheel2Motor.setVelocity(50, percent);
 
   Drivetrain.setStopping(brake);
   ClawMotor.setStopping(hold);
   ArmMotor.setStopping(hold);
   SecondArmMotor.setStopping(hold);
+  IntakeWheel1Motor.setStopping(hold);
+  IntakeWheel2Motor.setStopping(hold);
 
   task debugTask = task(debugStuff);
 

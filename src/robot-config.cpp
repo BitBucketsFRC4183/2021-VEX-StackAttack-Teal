@@ -15,6 +15,8 @@ drivetrain Drivetrain = drivetrain(LeftDriveSmart, RightDriveSmart, 319.19, 292.
 motor ClawMotor = motor(PORT2, ratio18_1, false);
 motor ArmMotor = motor(PORT9, ratio18_1, false);
 motor SecondArmMotor = motor(PORT4, ratio18_1, true);
+motor IntakeWheel1Motor = motor(PORT11, ratio18_1, false);
+motor IntakeWheel2Motor = motor(PORT20, ratio18_1, true);
 /*vex-vision-config:begin*/
 vision::signature Vision3__SIG_1 (1, 0, 0, 0, 0, 0, 0, 2.500, 0);
 vision::signature Vision3__SIG_2 (2, 0, 0, 0, 0, 0, 0, 2.500, 0);
