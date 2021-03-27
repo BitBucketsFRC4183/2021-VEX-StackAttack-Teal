@@ -33,6 +33,7 @@ controller::button liftArm() {return Controller1.ButtonR1;}
 controller::button dropArm() {return Controller1.ButtonR2;}
 
 controller::button spinIntake() {return Controller1.ButtonA;}
+controller::button spinOuttake() {return Controller1.ButtonY;}
 
 void setDriveVel(int vel) {
   int realVel = abs(vel);
@@ -127,12 +128,15 @@ int moveArmTask() {
   return 0;
 }
 
-int intakeWheelTask() {
+int intakeOuttakeWheelTask() {
+  // motor 2 is reversed in the config, so they spin in the same direction here
   while (true) {
     if (spinIntake().pressing()) {
-      // motor 2 is reversed in the config, so they spin in the same direction here
       IntakeWheel1Motor.spin(vex::forward);
       IntakeWheel2Motor.spin(vex::forward);
+    } else if (spinOuttake().pressing()) {
+      IntakeWheel1Motor.spin(vex::reverse);
+      IntakeWheel2Motor.spin(vex::reverse);
     } else {
       IntakeWheel1Motor.stop();
       IntakeWheel2Motor.stop();
@@ -153,7 +157,7 @@ void teleopMode() {
   task drivetrainTask = task(moveDrivetrainTask);
   task clawTask = task(moveClawTask);
   task armTask = task(moveArmTask);
-  task intakeTask = task(intakeWheelTask);
+  task intakeOuttakeTask = task(intakeOuttakeWheelTask);
 
   // wait indefinitely
   waitUntil(false);
