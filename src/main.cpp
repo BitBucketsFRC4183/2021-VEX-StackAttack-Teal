@@ -112,10 +112,13 @@ int moveArmTask() {
   while (true) {
     if (liftArm().pressing()) {
       ArmMotor.spin(vex::forward);
+      SecondArmMotor.spin(vex::forward);
     } else if (dropArm().pressing()) {
       ArmMotor.spin(vex::reverse);
+      SecondArmMotor.spin(vex::reverse);
     } else {
       ArmMotor.stop();
+      SecondArmMotor.stop();
     }
 
     wait(0.5, seconds);
@@ -238,10 +241,12 @@ int main() {
 
   ClawMotor.setVelocity(50, percent);
   ArmMotor.setVelocity(50, percent);
+  SecondArmMotor.setVelocity(50, percent);
 
   Drivetrain.setStopping(brake);
   ClawMotor.setStopping(hold);
   ArmMotor.setStopping(hold);
+  SecondArmMotor.setStopping(hold);
 
   task debugTask = task(debugStuff);
 
