@@ -37,7 +37,7 @@ void setDriveVel(int vel) {
   int realVel = abs(vel);
 
   //Change the velocity to some value between the configured range
-  int maxVel = 90;
+  int maxVel = 50;
   int minVel = 10;
 
   // clamp realVel to between maxVel and minVel
@@ -50,7 +50,7 @@ void setTurnVel(int vel) {
   int realVel = abs(vel);
 
   //Change the velocity to some value between the configured range
-  int maxVel = 90;
+  int maxVel = 50;
   int minVel = 10;
 
   realVel = realVel > maxVel ? maxVel : (realVel < minVel ? minVel : realVel);
