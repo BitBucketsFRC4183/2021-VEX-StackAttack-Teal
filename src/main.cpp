@@ -166,8 +166,12 @@ void autoMode() {
   setTurnVel(50);
 
   ////////////////// take out recycling //////////////////
-  Drivetrain.driveFor(27, inches);
+  // Drivetrain.driveFor(27, inches);
+  LeftDriveSmart.spinFor(10, rev, false);
+  RightDriveSmart.spinFor(10, rev, false);
     // todo: outtake
+  
+  return;
   
   ////////////////// walk the dog //////////////////
   // setup
