@@ -1,6 +1,6 @@
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // Robot Configuration:
-// [Name]               [Type]        [Port(s)]
+//[Name]              [Type]       [Port(s)]
 // Controller1          controller                    
 // Drivetrain           drivetrain    1, 10           
 // ClawMotor            motor         2               
@@ -8,50 +8,74 @@
 // ---- END VEXCODE CONFIGURED DEVICES ----
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
-/*    Module:       main.cpp                                                  */
-/*    Author:       C:\Users\Sajo                                             */
-/*    Created:      Wed Mar 10 2021                                           */
-/*    Description:  V5 project                                                */
-/*                                                                            */
+/*   Module:       main.cpp                                                  */
+/*   Author:       C:\Users\Sajo                                             */
+/*   Created:      Wed Mar 10 2021                                           */
+/*   Description:  V5 project                                                */
+/*                                                                           */
 /*----------------------------------------------------------------------------*/
-
 #include "vex.h"
 #include <iostream>
-
 using namespace vex;
 using namespace std;
 
 competition Competition;
 
-controller::axis turnAxis() {return Controller1.Axis1;}
-controller::axis driveAxis() {return Controller1.Axis3;}
+controller::axis turnAxis()
+{
+  return Controller1.Axis1;
+}
+controller::axis driveAxis()
+{
+  return Controller1.Axis3;
+}
 
-controller::button openClaw() {return Controller1.ButtonL1;}
-controller::button closeClaw() {return Controller1.ButtonL2;}
+controller::button openClaw()
+{
+  return Controller1.ButtonL1;
+}
+controller::button closeClaw()
+{
+  return Controller1.ButtonL2;
+}
 
-controller::button liftArm() {return Controller1.ButtonR1;}
-controller::button dropArm() {return Controller1.ButtonR2;}
+controller::button liftArm()
+{
+  return Controller1.ButtonR1;
+}
+controller::button dropArm()
+{
+  return Controller1.ButtonR2;
+}
 
-controller::button spinIntake() {return Controller1.ButtonA;}
-controller::button spinOuttake() {return Controller1.ButtonY;}
+controller::button spinIntake()
+{
+  return Controller1.ButtonA;
+}
+controller::button spinOuttake()
+{
+  return Controller1.ButtonY;
+}
 
-void setDriveVel(int vel) {
+void setDriveVel(int vel)
+{
   int realVel = abs(vel);
 
-  //Change the velocity to some value between the configured range
+ 	//Change the velocity to some value between the configured range
   int maxVel = 50;
   int minVel = 10;
 
-  // clamp realVel to between maxVel and minVel
+ 	// clamp realVel to between maxVel and minVel
   realVel = realVel > maxVel ? maxVel : (realVel < minVel ? minVel : realVel);
 
   Drivetrain.setDriveVelocity(realVel, percent);
 }
 
-void setTurnVel(int vel) {
+void setTurnVel(int vel)
+{
   int realVel = abs(vel);
 
-  //Change the velocity to some value between the configured range
+ 	//Change the velocity to some value between the configured range
   int maxVel = 50;
   int minVel = 10;
 
@@ -60,33 +84,46 @@ void setTurnVel(int vel) {
   Drivetrain.setTurnVelocity(realVel, percent);
 }
 
-int moveDrivetrainTask() {
-  while (true) {
+int moveDrivetrainTask()
+{
+  while (true)
+  {
     int drivePos = driveAxis().position();
     int turnPos = turnAxis().position();
 
     setDriveVel(drivePos);
     setTurnVel(turnPos);
 
-    if (drivePos == 0 && turnPos == 0) {
+    if (drivePos == 0 && turnPos == 0)
+    {
       Drivetrain.stop();
     }
 
-    /// driving
-    if (drivePos > 0) {
+   	/// driving
+    if (drivePos > 0)
+    {
       Drivetrain.drive(vex::forward);
-    } else if (drivePos < 0) {
+    }
+    else if (drivePos < 0)
+    {
       Drivetrain.drive(vex::reverse);
-    } else {
+    }
+    else
+    {
       Drivetrain.setDriveVelocity(0, percent);
     }
 
-    /// turning
-    if (turnPos > 0) {
+   	/// turning
+    if (turnPos > 0)
+    {
       Drivetrain.turn(vex::right);
-    } else if (turnPos < 0) {
+    }
+    else if (turnPos < 0)
+    {
       Drivetrain.turn(vex::left);
-    } else {
+    }
+    else
+    {
       Drivetrain.setTurnVelocity(0, percent);
     }
 
@@ -95,13 +132,20 @@ int moveDrivetrainTask() {
   return 0;
 }
 
-int moveClawTask() {
-  while (true) {
-    if (openClaw().pressing()) {
+int moveClawTask()
+{
+  while (true)
+  {
+    if (openClaw().pressing())
+    {
       ClawMotor.spin(vex::forward);
-    } else if (closeClaw().pressing()) {
+    }
+    else if (closeClaw().pressing())
+    {
       ClawMotor.spin(vex::reverse);
-    } else {
+    }
+    else
+    {
       ClawMotor.stop();
     }
 
@@ -110,15 +154,22 @@ int moveClawTask() {
   return 0;
 }
 
-int moveArmTask() {
-  while (true) {
-    if (liftArm().pressing()) {
+int moveArmTask()
+{
+  while (true)
+  {
+    if (liftArm().pressing())
+    {
       ArmMotor.spin(vex::forward);
       SecondArmMotor.spin(vex::forward);
-    } else if (dropArm().pressing()) {
+    }
+    else if (dropArm().pressing())
+    {
       ArmMotor.spin(vex::reverse);
       SecondArmMotor.spin(vex::reverse);
-    } else {
+    }
+    else
+    {
       ArmMotor.stop();
       SecondArmMotor.stop();
     }
@@ -128,16 +179,23 @@ int moveArmTask() {
   return 0;
 }
 
-int intakeOuttakeWheelTask() {
-  // motor 2 is reversed in the config, so they spin in the same direction here
-  while (true) {
-    if (spinIntake().pressing()) {
+int intakeOuttakeWheelTask()
+{
+ 	// motor 2 is reversed in the config, so they spin in the same direction here
+  while (true)
+  {
+    if (spinIntake().pressing())
+    {
       IntakeWheel1Motor.spin(vex::forward);
       IntakeWheel2Motor.spin(vex::forward);
-    } else if (spinOuttake().pressing()) {
+    }
+    else if (spinOuttake().pressing())
+    {
       IntakeWheel1Motor.spin(vex::reverse);
       IntakeWheel2Motor.spin(vex::reverse);
-    } else {
+    }
+    else
+    {
       IntakeWheel1Motor.stop();
       IntakeWheel2Motor.stop();
     }
@@ -146,41 +204,44 @@ int intakeOuttakeWheelTask() {
 
 /////////////////
 
-bool isGreenCube() {
+bool isGreenCube()
+{
   Vision3.takeSnapshot(Vision3__SIG_3);
   bool isGreen = Vision3.objects[0].exists;
   return isGreen;
 }
 
 ////////////////
-void teleopMode() {
+void teleopMode()
+{
   task drivetrainTask = task(moveDrivetrainTask);
   task clawTask = task(moveClawTask);
   task armTask = task(moveArmTask);
   task intakeOuttakeTask = task(intakeOuttakeWheelTask);
 
-  // wait indefinitely
+ 	// wait indefinitely
   waitUntil(false);
 
-  // while (true) {
-    // cout << isGreenCube() << endl;
+ 	// while (true) {
+ 	// cout << isGreenCube() << endl;
 
-    // turnAxis().changed(turnRobot);
-    // driveAxis().changed(driveRobot);
+ 	// turnAxis().changed(turnRobot);
+ 	// driveAxis().changed(driveRobot);
 
-    // openClaw().pressed(moveClaw);
-    // openClaw().released(moveClaw);
-    // closeClaw().pressed(moveClaw);
-    // closeClaw().released(moveClaw);
+ 	// openClaw().pressed(moveClaw);
+ 	// openClaw().released(moveClaw);
+ 	// closeClaw().pressed(moveClaw);
+ 	// closeClaw().released(moveClaw);
 
-    // liftArm().pressed(moveArm);
-    // liftArm().released(moveArm);
-    // dropArm().pressed(moveArm);
-    // dropArm().released(moveArm);
-  // }
+ 	// liftArm().pressed(moveArm);
+ 	// liftArm().released(moveArm);
+ 	// dropArm().pressed(moveArm);
+ 	// dropArm().released(moveArm);
+ 	// }
 }
 
-void intakeAutoCube() {
+void intakeAutoCube()
+{
   int currentSpikeCutoff = 10;
 
   IntakeWheel1Motor.spin(vex::reverse);
@@ -188,73 +249,81 @@ void intakeAutoCube() {
 
   int mCurrent = IntakeWheel1Motor.current();
 
-  while (true) {
+  while (true)
+  {
     int newMCurrent = IntakeWheel1Motor.current();
-    if (newMCurrent >= mCurrent + currentSpikeCutoff) {
+    if (newMCurrent >= mCurrent + currentSpikeCutoff)
+    {
       return;
-    } else {
+    }
+    else
+    {
       mCurrent = newMCurrent;
     }
   }
-
 }
 
-void autoMode() {
+void autoMode()
+{
   setDriveVel(50);
   setTurnVel(50);
 
-  ////////////////// take out recycling //////////////////
-  // Drivetrain.driveFor(27, inches);
+ 	////////////////// take out recycling	//////////////////
+ 	// Drivetrain.driveFor(27, inches);
   LeftDriveSmart.spinFor(10, rev, false);
   RightDriveSmart.spinFor(10, rev, false);
-  // outtake
+ 	// outtake
   IntakeWheel1Motor.spin(vex::reverse);
   IntakeWheel2Motor.spin(vex::reverse);
-  
+
   return;
-  
-  ////////////////// walk the dog //////////////////
-  // setup
+
+ 	////////////////// walk the dog	//////////////////
+ 	// setup
   Drivetrain.turnFor(vex::right, 90, degrees);
   Drivetrain.driveFor(24, inches);
-  // cross
+ 	// cross
   Drivetrain.turnFor(vex::right, 45, degrees);
   Drivetrain.driveFor(20, inches);
-  // recover; turn left towards green and orange cube
+ 	// recover; turn left towards green and orange cube
   Drivetrain.turnFor(vex::right, 45, degrees);
 
-  ////////////////// set the table //////////////////
-  // setup 
+ 	////////////////// set the table	//////////////////
+ 	// setup 
   Drivetrain.driveFor(20, inches);
   Drivetrain.turnFor(vex::left, 90, degrees);
-  
-  // bottom cube first
+
+ 	// bottom cube first
   Drivetrain.driveFor(5, inches);
   Drivetrain.turnFor(vex::right, 90, degrees);
 
-  if (isGreenCube()) {
-    // push it off then go back to home
+  if (isGreenCube())
+  {
+   	// push it off then go back to home
     Drivetrain.driveFor(5, inches);
     Drivetrain.driveFor(vex::reverse, 5, inches);
     Drivetrain.turnFor(vex::right, 90, degrees);
     Drivetrain.driveFor(26, inches);
-  } else {
-    // back up and go to top cube
+  }
+  else
+  {
+   	// back up and go to top cube
     Drivetrain.driveFor(vex::reverse, 5, inches);
     Drivetrain.turnFor(vex::right, 90, degrees);
     Drivetrain.driveFor(6, inches);
     Drivetrain.turnFor(vex::left, 90, degrees);
-    // intake then go back to home
-    Drivetrain.driveFor(2.5, inches);
-    intakeAutoCube();
+   	// push it off then go back to home
+    Drivetrain.driveFor(5, inches);
     Drivetrain.driveFor(vex::reverse, 5, inches);
     Drivetrain.turnFor(vex::right, 90, degrees);
     Drivetrain.driveFor(13, inches);
   }
 }
 
-int debugStuff() {
-  while (true) {
+int debugStuff()
+{
+  while (true)
+  {
     cout << "drive: ";
     cout << driveAxis().position() << endl;
 
@@ -272,16 +341,17 @@ int debugStuff() {
 
     cout << "----" << endl;
 
-    // cout << "is there a green cube:";
-    // cout << isGreenCube() << endl;
+   	// cout << "is there a green cube:";
+   	// cout << isGreenCube() << endl;
 
-    wait (0.5, seconds);
+    wait(0.5, seconds);
   }
   return 0;
 }
 
-int main() {
-  // Initializing Robot Configuration. DO NOT REMOVE!
+int main()
+{
+ 	// Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
 
   ClawMotor.setVelocity(50, percent);
@@ -299,11 +369,11 @@ int main() {
 
   task debugTask = task(debugStuff);
 
-  // autoMode();
+ 	// autoMode();
   teleopMode();
 
-  // Competition.autonomous(autoMode);
-  // Competition.drivercontrol(teleopMode);
-  
+ 	// Competition.autonomous(autoMode);
+ 	// Competition.drivercontrol(teleopMode);
+
   return 0;
 }
