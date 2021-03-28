@@ -180,6 +180,25 @@ void teleopMode() {
   // }
 }
 
+void intakeAutoCube() {
+  int currentSpikeCutoff = 10;
+
+  IntakeWheel1Motor.spin(vex::reverse);
+  IntakeWheel2Motor.spin(vex::reverse);
+
+  int mCurrent = IntakeWheel1Motor.current();
+
+  while (true) {
+    int newMCurrent = IntakeWheel1Motor.current();
+    if (newMCurrent >= mCurrent + currentSpikeCutoff) {
+      return;
+    } else {
+      mCurrent = newMCurrent;
+    }
+  }
+
+}
+
 void autoMode() {
   setDriveVel(50);
   setTurnVel(50);
@@ -188,7 +207,9 @@ void autoMode() {
   // Drivetrain.driveFor(27, inches);
   LeftDriveSmart.spinFor(10, rev, false);
   RightDriveSmart.spinFor(10, rev, false);
-    // todo: outtake
+  // outtake
+  IntakeWheel1Motor.spin(vex::reverse);
+  IntakeWheel2Motor.spin(vex::reverse);
   
   return;
   
@@ -223,8 +244,9 @@ void autoMode() {
     Drivetrain.turnFor(vex::right, 90, degrees);
     Drivetrain.driveFor(6, inches);
     Drivetrain.turnFor(vex::left, 90, degrees);
-    // push it off then go back to home
-    Drivetrain.driveFor(5, inches);
+    // intake then go back to home
+    Drivetrain.driveFor(2.5, inches);
+    intakeAutoCube();
     Drivetrain.driveFor(vex::reverse, 5, inches);
     Drivetrain.turnFor(vex::right, 90, degrees);
     Drivetrain.driveFor(13, inches);
