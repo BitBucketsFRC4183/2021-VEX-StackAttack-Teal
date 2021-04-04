@@ -75,8 +75,8 @@ void setTurnVel(int vel)
   int realVel = abs(vel);
 
  	//Change the velocity to some value between the configured range
-  int maxVel = 50;
-  int minVel = 10;
+  int maxVel = 30;
+  int minVel = 1;
 
   realVel = realVel > maxVel ? maxVel : (realVel < minVel ? minVel : realVel);
 
@@ -249,6 +249,11 @@ void autoMode()
 {
   setDriveVel(50);
   setTurnVel(50);
+
+  Drivetrain.driveFor(5, inches);
+  Drivetrain.driveFor(reverse, 10, inches);
+
+  return;
 
  	////////////////// take out recycling	//////////////////
  	// Drivetrain.driveFor(27, inches);
