@@ -359,10 +359,10 @@ int main()
   task debugTask = task(debugStuff);
 
  	// autoMode();
-  teleopMode();
+  // teleopMode();
 
- 	// Competition.autonomous(autoMode);
- 	// Competition.drivercontrol(teleopMode);
+ 	Competition.autonomous(autoMode);
+ 	Competition.drivercontrol(teleopMode);
 
   return 0;
 }
