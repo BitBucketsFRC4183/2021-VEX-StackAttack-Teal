@@ -21,8 +21,7 @@ using namespace std;
 
 competition Competition;
 
-controller::axis turnAxis()
-{
+controller::axis turnAxis() {
   return Controller1.Axis1;
 }
 controller::axis driveAxis()
@@ -221,23 +220,6 @@ void teleopMode()
 
  	// wait indefinitely
   waitUntil(false);
-
- 	// while (true) {
- 	// cout << isGreenCube() << endl;
-
- 	// turnAxis().changed(turnRobot);
- 	// driveAxis().changed(driveRobot);
-
- 	// openClaw().pressed(moveClaw);
- 	// openClaw().released(moveClaw);
- 	// closeClaw().pressed(moveClaw);
- 	// closeClaw().released(moveClaw);
-
- 	// liftArm().pressed(moveArm);
- 	// liftArm().released(moveArm);
- 	// dropArm().pressed(moveArm);
- 	// dropArm().released(moveArm);
- 	// }
 }
 
 void intakeAutoCube()
