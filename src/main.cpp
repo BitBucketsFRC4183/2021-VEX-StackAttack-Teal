@@ -291,13 +291,13 @@ void autoMode()
   if (true) //isGreenCube()
   {
     // push it off 
+    IntakeWheel1Motor.spin(vex::reverse);
+    IntakeWheel2Motor.spin(vex::reverse);
     Drivetrain.driveFor(12, inches);
-   	// intake then go back to home
-    // Drivetrain.driveFor(2.5, inches);
-    // intakeAutoCube();
-    // Drivetrain.driveFor(vex::reverse, 5, inches);
+    IntakeWheel1Motor.stop();
+    IntakeWheel2Motor.stop();
     // backup
-    Drivetrain.driveFor(reverse, 5, inches);
+    Drivetrain.driveFor(reverse, 8, inches);
     // then go back to home
     Drivetrain.turnFor(vex::right, 100, degrees);
     Drivetrain.driveFor(30, inches);
