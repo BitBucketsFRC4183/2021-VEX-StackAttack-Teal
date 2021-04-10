@@ -21,7 +21,8 @@ using namespace std;
 
 competition Competition;
 
-controller::axis turnAxis() {
+controller::axis turnAxis()
+{
   return Controller1.Axis1;
 }
 controller::axis driveAxis()
@@ -79,6 +80,7 @@ void setTurnVel(int vel)
   int minVel = 1;
 
   realVel = realVel > maxVel ? maxVel : (realVel < minVel ? minVel : realVel);
+  cout << realVel << endl;
 
   Drivetrain.setTurnVelocity(realVel, percent);
 }
@@ -89,6 +91,8 @@ int moveDrivetrainTask()
   {
     int drivePos = driveAxis().position();
     int turnPos = turnAxis().position();
+
+    cout << turnPos << endl;
 
     setDriveVel(drivePos);
     setTurnVel(turnPos);
@@ -236,6 +240,9 @@ void intakeAutoCube()
     int newMCurrent = IntakeWheel1Motor.current();
     if (newMCurrent >= mCurrent + currentSpikeCutoff)
     {
+      IntakeWheel1Motor.spinFor(vex::reverse, 3, seconds); // waitForCompletion = false?
+      IntakeWheel2Motor.spinFor(vex::reverse, 3, seconds); // waitForCompletion = false?
+
       return;
     }
     else
