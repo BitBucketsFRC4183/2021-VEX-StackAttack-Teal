@@ -272,7 +272,7 @@ void autoMode()
 
  	////////////////// walk the dog	//////////////////
  	// setup
-  Drivetrain.turnFor(vex::right, 90, degrees);
+  Drivetrain.turnFor(vex::right, 75, degrees);
   Drivetrain.driveFor(24, inches);
  	// cross
   Drivetrain.turnFor(vex::right, 45, degrees);
@@ -284,7 +284,7 @@ void autoMode()
  	// setup 
   Drivetrain.driveFor(20, inches);
   // bottom cube first
-  Drivetrain.turnFor(vex::left, 18, degrees);
+  Drivetrain.turnFor(vex::left, 25, degrees);
   Drivetrain.driveFor(12, inches);
 
   
