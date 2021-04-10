@@ -80,7 +80,6 @@ void setTurnVel(int vel)
   int minVel = 1;
 
   realVel = realVel > maxVel ? maxVel : (realVel < minVel ? minVel : realVel);
-  cout << realVel << endl;
 
   Drivetrain.setTurnVelocity(realVel, percent);
 }
@@ -91,8 +90,6 @@ int moveDrivetrainTask()
   {
     int drivePos = driveAxis().position();
     int turnPos = turnAxis().position();
-
-    cout << turnPos << endl;
 
     setDriveVel(drivePos);
     setTurnVel(turnPos);
@@ -366,7 +363,7 @@ int main()
   task debugTask = task(debugStuff);
 
  	autoMode();
-  teleopMode();
+  // teleopMode();
 
  	// Competition.autonomous(autoMode);
  	// Competition.drivercontrol(teleopMode);
