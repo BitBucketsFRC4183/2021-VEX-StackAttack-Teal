@@ -254,20 +254,21 @@ void autoMode()
   setDriveVel(50);
   setTurnVel(50);
 
-  Drivetrain.driveFor(5, inches);
-  Drivetrain.driveFor(reverse, 10, inches);
-
-  return;
-
  	////////////////// take out recycling	//////////////////
- 	// Drivetrain.driveFor(27, inches);
-  LeftDriveSmart.spinFor(10, rev, false);
-  RightDriveSmart.spinFor(10, rev, false);
+ 	Drivetrain.driveFor(26, inches);
+  // LeftDriveSmart.spinFor(4, rev, false);
+  // RightDriveSmart.spinFor(4, rev, false);
  	// outtake
   IntakeWheel1Motor.spin(vex::reverse);
   IntakeWheel2Motor.spin(vex::reverse);
 
-  return;
+  // wait for cube to outtkae
+  wait(1, seconds);
+  
+  // backup to not hit cube and then stop motors
+  Drivetrain.driveFor(reverse, 2, inches);
+  IntakeWheel1Motor.stop();
+  IntakeWheel2Motor.stop();
 
  	////////////////// walk the dog	//////////////////
  	// setup
@@ -277,25 +278,29 @@ void autoMode()
   Drivetrain.turnFor(vex::right, 45, degrees);
   Drivetrain.driveFor(20, inches);
  	// recover; turn left towards green and orange cube
-  Drivetrain.turnFor(vex::right, 45, degrees);
+  Drivetrain.turnFor(vex::right, 25, degrees);
 
  	////////////////// set the table	//////////////////
  	// setup 
   Drivetrain.driveFor(20, inches);
-  Drivetrain.turnFor(vex::left, 90, degrees);
+  // bottom cube first
+  Drivetrain.turnFor(vex::left, 18, degrees);
+  Drivetrain.driveFor(12, inches);
 
- 	// bottom cube first
-  Drivetrain.driveFor(5, inches);
-  Drivetrain.turnFor(vex::right, 90, degrees);
-
-  if (isGreenCube())
+  
+  if (true) //isGreenCube()
   {
+    // push it off 
+    Drivetrain.driveFor(12, inches);
    	// intake then go back to home
-    Drivetrain.driveFor(2.5, inches);
-    intakeAutoCube();
-    Drivetrain.driveFor(vex::reverse, 5, inches);
-    Drivetrain.turnFor(vex::right, 90, degrees);
-    Drivetrain.driveFor(26, inches);
+    // Drivetrain.driveFor(2.5, inches);
+    // intakeAutoCube();
+    // Drivetrain.driveFor(vex::reverse, 5, inches);
+    // backup
+    Drivetrain.driveFor(reverse, 5, inches);
+    // then go back to home
+    Drivetrain.turnFor(vex::right, 100, degrees);
+    Drivetrain.driveFor(30, inches);
   }
   else
   {
