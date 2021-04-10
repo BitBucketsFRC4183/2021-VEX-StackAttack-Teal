@@ -297,9 +297,9 @@ void autoMode()
     IntakeWheel1Motor.stop();
     IntakeWheel2Motor.stop();
     // backup
-    Drivetrain.driveFor(reverse, 8, inches);
+    Drivetrain.driveFor(reverse, 10, inches);
     // then go back to home
-    Drivetrain.turnFor(vex::right, 100, degrees);
+    Drivetrain.turnFor(vex::right, 130, degrees);
     Drivetrain.driveFor(30, inches);
   }
   else
