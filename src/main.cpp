@@ -273,18 +273,18 @@ void autoMode()
  	////////////////// walk the dog	//////////////////
  	// setup
   Drivetrain.turnFor(vex::right, 70, degrees);
-  Drivetrain.driveFor(30, inches);
+  Drivetrain.driveFor(35, inches);
  	// cross
-  Drivetrain.turnFor(vex::right, 45, degrees);
-  Drivetrain.driveFor(20, inches);
- 	// recover; turn left towards green and orange cube
   Drivetrain.turnFor(vex::right, 30, degrees);
+  Drivetrain.driveFor(25, inches);
+ 	// recover; turn left towards green and orange cube
+  Drivetrain.turnFor(vex::right, 35, degrees);
 
  	////////////////// set the table	//////////////////
  	// setup 
   Drivetrain.driveFor(20, inches);
   // bottom cube first
-  Drivetrain.turnFor(vex::left, 60, degrees);
+  Drivetrain.turnFor(vex::left, 65, degrees);
   Drivetrain.driveFor(12, inches);
 
   
@@ -293,7 +293,7 @@ void autoMode()
     // push it off 
     IntakeWheel1Motor.spin(vex::reverse);
     IntakeWheel2Motor.spin(vex::reverse);
-    Drivetrain.driveFor(12, inches);
+    Drivetrain.driveFor(11, inches);
     IntakeWheel1Motor.stop();
     IntakeWheel2Motor.stop();
     // backup
