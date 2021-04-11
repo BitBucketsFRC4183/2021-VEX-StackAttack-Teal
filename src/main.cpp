@@ -263,6 +263,8 @@ void autoMode()
   // wait for cube to outtkae
   wait(1, seconds);
 
+  Drivetrain.driveFor(reverse, 27, inches);
+
   return;
   
   // // backup to not hit cube and then stop motors
