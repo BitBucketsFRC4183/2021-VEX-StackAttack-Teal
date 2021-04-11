@@ -273,19 +273,19 @@ void autoMode()
  	////////////////// walk the dog	//////////////////
  	// setup
   Drivetrain.turnFor(vex::right, 70, degrees);
+  Drivetrain.driveFor(40, inches);
+
+  // TEMP DRIVE TO HOME
+  Drivetrain.turnFor(vex::right, 40, degrees);
   Drivetrain.driveFor(35, inches);
+
+  return;
+
  	// cross
   Drivetrain.turnFor(vex::right, 30, degrees);
   Drivetrain.driveFor(30, inches);
  	// recover; turn left towards green and orange cube
   Drivetrain.turnFor(vex::right, 30, degrees);
-
-  /// TEMP DRIVE TO HOME
-  Drivetrain.driveFor(7, inches);
-  Drivetrain.turnFor(vex::right, 125, degrees);
-  Drivetrain.driveFor(40, inches);
-
-  return;
 
  	////////////////// set the table	//////////////////
  	// setup 
