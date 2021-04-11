@@ -284,7 +284,7 @@ void autoMode()
  	// setup 
   Drivetrain.driveFor(20, inches);
   // bottom cube first
-  Drivetrain.turnFor(vex::left, 30, degrees);
+  Drivetrain.turnFor(vex::left, 50, degrees);
   Drivetrain.driveFor(12, inches);
 
   
@@ -297,10 +297,10 @@ void autoMode()
     IntakeWheel1Motor.stop();
     IntakeWheel2Motor.stop();
     // backup
-    Drivetrain.driveFor(reverse, 15, inches);
+    Drivetrain.driveFor(reverse, 18, inches);
     // then go back to home
-    Drivetrain.turnFor(vex::right, 140, degrees);
-    Drivetrain.driveFor(30, inches);
+    Drivetrain.turnFor(vex::right, 150, degrees);
+    Drivetrain.driveFor(32.5, inches);
   }
   else
   {
