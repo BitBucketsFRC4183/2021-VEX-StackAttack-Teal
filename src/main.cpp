@@ -284,7 +284,7 @@ void autoMode()
  	// setup 
   Drivetrain.driveFor(20, inches);
   // bottom cube first
-  Drivetrain.turnFor(vex::left, 75, degrees);
+  Drivetrain.turnFor(vex::left, 60, degrees);
   Drivetrain.driveFor(12, inches);
 
   
