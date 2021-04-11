@@ -273,10 +273,10 @@ void autoMode()
  	////////////////// walk the dog	//////////////////
  	// setup
   Drivetrain.turnFor(vex::right, 70, degrees);
-  Drivetrain.driveFor(24, inches);
+  Drivetrain.driveFor(30, inches);
  	// cross
   Drivetrain.turnFor(vex::right, 45, degrees);
-  Drivetrain.driveFor(27.5, inches);
+  Drivetrain.driveFor(20, inches);
  	// recover; turn left towards green and orange cube
   Drivetrain.turnFor(vex::right, 30, degrees);
 
