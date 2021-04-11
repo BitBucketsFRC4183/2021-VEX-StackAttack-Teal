@@ -256,8 +256,6 @@ void autoMode()
 
  	////////////////// take out recycling	//////////////////
  	Drivetrain.driveFor(26, inches);
-  // LeftDriveSmart.spinFor(4, rev, false);
-  // RightDriveSmart.spinFor(4, rev, false);
  	// outtake
   IntakeWheel1Motor.spin(vex::reverse);
   IntakeWheel2Motor.spin(vex::reverse);
@@ -281,48 +279,48 @@ void autoMode()
 
   return;
 
- 	// cross
-  Drivetrain.turnFor(vex::right, 30, degrees);
-  Drivetrain.driveFor(30, inches);
- 	// recover; turn left towards green and orange cube
-  Drivetrain.turnFor(vex::right, 30, degrees);
+ 	// // cross
+  // Drivetrain.turnFor(vex::right, 30, degrees);
+  // Drivetrain.driveFor(30, inches);
+ 	// // recover; turn left towards green and orange cube
+  // Drivetrain.turnFor(vex::right, 30, degrees);
 
- 	////////////////// set the table	//////////////////
- 	// setup 
-  Drivetrain.driveFor(20, inches);
-  // bottom cube first
-  Drivetrain.turnFor(vex::left, 65, degrees);
-  Drivetrain.driveFor(12, inches);
+ 	// ////////////////// set the table	//////////////////
+ 	// // setup 
+  // Drivetrain.driveFor(20, inches);
+  // // bottom cube first
+  // Drivetrain.turnFor(vex::left, 65, degrees);
+  // Drivetrain.driveFor(12, inches);
 
   
-  if (true) //isGreenCube()
-  {
-    // push it off 
-    IntakeWheel1Motor.spin(vex::reverse);
-    IntakeWheel2Motor.spin(vex::reverse);
-    Drivetrain.driveFor(11, inches);
-    IntakeWheel1Motor.stop();
-    IntakeWheel2Motor.stop();
-    // backup
-    Drivetrain.driveFor(reverse, 18, inches);
-    // then go back to home
-    Drivetrain.turnFor(vex::right, 150, degrees);
-    Drivetrain.driveFor(32.5, inches);
-  }
-  else
-  {
-   	// back up and go to top cube
-    Drivetrain.driveFor(vex::reverse, 5, inches);
-    Drivetrain.turnFor(vex::right, 90, degrees);
-    Drivetrain.driveFor(6, inches);
-    Drivetrain.turnFor(vex::left, 90, degrees);
-   	// intake then go back to home
-    Drivetrain.driveFor(2.5, inches);
-    intakeAutoCube();
-    Drivetrain.driveFor(vex::reverse, 5, inches);
-    Drivetrain.turnFor(vex::right, 90, degrees);
-    Drivetrain.driveFor(13, inches);
-  }
+  // if (true) //isGreenCube()
+  // {
+  //   // push it off 
+  //   IntakeWheel1Motor.spin(vex::reverse);
+  //   IntakeWheel2Motor.spin(vex::reverse);
+  //   Drivetrain.driveFor(11, inches);
+  //   IntakeWheel1Motor.stop();
+  //   IntakeWheel2Motor.stop();
+  //   // backup
+  //   Drivetrain.driveFor(reverse, 18, inches);
+  //   // then go back to home
+  //   Drivetrain.turnFor(vex::right, 150, degrees);
+  //   Drivetrain.driveFor(32.5, inches);
+  // }
+  // else
+  // {
+  //  	// back up and go to top cube
+  //   Drivetrain.driveFor(vex::reverse, 5, inches);
+  //   Drivetrain.turnFor(vex::right, 90, degrees);
+  //   Drivetrain.driveFor(6, inches);
+  //   Drivetrain.turnFor(vex::left, 90, degrees);
+  //  	// intake then go back to home
+  //   Drivetrain.driveFor(2.5, inches);
+  //   intakeAutoCube();
+  //   Drivetrain.driveFor(vex::reverse, 5, inches);
+  //   Drivetrain.turnFor(vex::right, 90, degrees);
+  //   Drivetrain.driveFor(13, inches);
+  // }
 }
 
 int debugStuff()
