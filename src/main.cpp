@@ -275,7 +275,7 @@ void autoMode()
   Drivetrain.turnFor(vex::right, 65, degrees);
   Drivetrain.driveFor(24, inches);
  	// cross
-  Drivetrain.turnFor(vex::right, 30, degrees);
+  Drivetrain.turnFor(vex::right, 20, degrees);
   Drivetrain.driveFor(20, inches);
  	// recover; turn left towards green and orange cube
   Drivetrain.turnFor(vex::right, 20, degrees);
@@ -293,7 +293,7 @@ void autoMode()
     // push it off 
     IntakeWheel1Motor.spin(vex::reverse);
     IntakeWheel2Motor.spin(vex::reverse);
-    Drivetrain.driveFor(15, inches);
+    Drivetrain.driveFor(12, inches);
     IntakeWheel1Motor.stop();
     IntakeWheel2Motor.stop();
     // backup
