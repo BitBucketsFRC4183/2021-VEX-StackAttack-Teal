@@ -280,6 +280,13 @@ void autoMode()
  	// recover; turn left towards green and orange cube
   Drivetrain.turnFor(vex::right, 35, degrees);
 
+  /// TEMP DRIVE TO HOME
+  Drivetrain.driveFor(7, inches);
+  Drivetrain.turnFor(vex::right, 125, degrees);
+  Drivetrain.driveFor(40, inches);
+
+  return;
+
  	////////////////// set the table	//////////////////
  	// setup 
   Drivetrain.driveFor(20, inches);
