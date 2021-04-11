@@ -262,20 +262,22 @@ void autoMode()
 
   // wait for cube to outtkae
   wait(1, seconds);
+
+  return;
   
-  // backup to not hit cube and then stop motors
-  Drivetrain.driveFor(reverse, 2, inches);
-  IntakeWheel1Motor.stop();
-  IntakeWheel2Motor.stop();
+  // // backup to not hit cube and then stop motors
+  // Drivetrain.driveFor(reverse, 2, inches);
+  // IntakeWheel1Motor.stop();
+  // IntakeWheel2Motor.stop();
 
- 	////////////////// walk the dog	//////////////////
- 	// setup
-  Drivetrain.turnFor(vex::right, 70, degrees);
-  Drivetrain.driveFor(40, inches);
+ 	// ////////////////// walk the dog	//////////////////
+ 	// // setup
+  // Drivetrain.turnFor(vex::right, 70, degrees);
+  // Drivetrain.driveFor(40, inches);
 
-  // TEMP DRIVE TO HOME
-  Drivetrain.turnFor(vex::right, 40, degrees);
-  Drivetrain.driveFor(35, inches);
+  // // TEMP DRIVE TO HOME
+  // Drivetrain.turnFor(vex::right, 40, degrees);
+  // Drivetrain.driveFor(35, inches);
 
   return;
 
@@ -373,7 +375,7 @@ int main()
   task debugTask = task(debugStuff);
 
  	autoMode();
-  // teleopMode();
+  teleopMode();
 
  	// Competition.autonomous(autoMode);
  	// Competition.drivercontrol(teleopMode);
