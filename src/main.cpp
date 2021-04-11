@@ -272,7 +272,7 @@ void autoMode()
 
  	////////////////// walk the dog	//////////////////
  	// setup
-  Drivetrain.turnFor(vex::right, 75, degrees);
+  Drivetrain.turnFor(vex::right, 65, degrees);
   Drivetrain.driveFor(24, inches);
  	// cross
   Drivetrain.turnFor(vex::right, 45, degrees);
@@ -293,13 +293,13 @@ void autoMode()
     // push it off 
     IntakeWheel1Motor.spin(vex::reverse);
     IntakeWheel2Motor.spin(vex::reverse);
-    Drivetrain.driveFor(12, inches);
+    Drivetrain.driveFor(15, inches);
     IntakeWheel1Motor.stop();
     IntakeWheel2Motor.stop();
     // backup
     Drivetrain.driveFor(reverse, 10, inches);
     // then go back to home
-    Drivetrain.turnFor(vex::right, 130, degrees);
+    Drivetrain.turnFor(vex::right, 140, degrees);
     Drivetrain.driveFor(30, inches);
   }
   else
