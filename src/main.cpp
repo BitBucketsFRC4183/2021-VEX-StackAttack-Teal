@@ -255,31 +255,29 @@ void autoMode()
   setTurnVel(50);
 
  	////////////////// take out recycling	//////////////////
- 	Drivetrain.driveFor(26, inches);
+ 	Drivetrain.driveFor(27, inches);
  	// outtake
   IntakeWheel1Motor.spin(vex::reverse);
   IntakeWheel2Motor.spin(vex::reverse);
 
   // wait for cube to outtkae
-  wait(1, seconds);
+  wait(0.5, seconds);
 
-  Drivetrain.driveFor(reverse, 27, inches);
+  // backup to not hit cube and then stop motors
+  Drivetrain.driveFor(reverse, 2, inches);
+  IntakeWheel1Motor.stop();
+  IntakeWheel2Motor.stop();
 
-  return;
-  
-  // // backup to not hit cube and then stop motors
-  // Drivetrain.driveFor(reverse, 2, inches);
-  // IntakeWheel1Motor.stop();
-  // IntakeWheel2Motor.stop();
+ 	////////////////// walk the dog	//////////////////
+ 	// setup
+  Drivetrain.turnFor(vex::right, 90, degrees);
+  Drivetrain.driveFor(30, inches);
 
- 	// ////////////////// walk the dog	//////////////////
- 	// // setup
-  // Drivetrain.turnFor(vex::right, 70, degrees);
-  // Drivetrain.driveFor(40, inches);
-
-  // // TEMP DRIVE TO HOME
-  // Drivetrain.turnFor(vex::right, 40, degrees);
-  // Drivetrain.driveFor(35, inches);
+  // TEMP DRIVE TO HOME
+  Drivetrain.turnFor(vex::right, 90, degrees);
+  Drivetrain.driveFor(25, inches);
+  Drivetrain.turnFor(vex::right, 45, degrees);
+  Drivetrain.driveFor(30, inches);
 
   return;
 
