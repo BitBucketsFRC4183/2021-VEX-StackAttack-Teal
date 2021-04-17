@@ -271,11 +271,11 @@ void autoMode()
  	////////////////// walk the dog	//////////////////
  	// setup
   Drivetrain.turnFor(vex::right, 90, degrees);
-  Drivetrain.driveFor(30, inches);
+  Drivetrain.driveFor(40, inches);
 
   // TEMP DRIVE TO HOME
   Drivetrain.turnFor(vex::right, 90, degrees);
-  Drivetrain.driveFor(25, inches);
+  Drivetrain.driveFor(30, inches);
   Drivetrain.turnFor(vex::right, 45, degrees);
   Drivetrain.driveFor(30, inches);
 
