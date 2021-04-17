@@ -274,7 +274,7 @@ void autoMode()
   Drivetrain.driveFor(35, inches);
 
   // TEMP DRIVE TO HOME
-  Drivetrain.turnFor(vex::right, 90, degrees);
+  Drivetrain.turnFor(vex::right, 70, degrees);
   Drivetrain.driveFor(30, inches);
   Drivetrain.turnFor(vex::right, 45, degrees);
   Drivetrain.driveFor(30, inches);
