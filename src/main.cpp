@@ -374,7 +374,7 @@ int main()
 
   task debugTask = task(debugStuff);
 
- 	// autoMode();
+ 	autoMode();
   teleopMode();
 
   return 0;
